@@ -8,7 +8,7 @@
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
       "DISMulticastAddress" : "0.0.0.0",
-      "DISNIA" : "192.168.1.218",
+      "DISNIA" : "192.168.1.76",
       "DISPort" : 3000,
       "DISRcvBuffSize" : 2048,
       "DISSiteNumber" : 1,
@@ -29,7 +29,7 @@
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
-         "D:\\code\\ds.tools_git\\coreUnrealAutomaticMode\\Plugins\\coreDSModule\\ThirdParty\\coreDS\\bin\\VC140\\x64\\Release\\/DIS_V5_IEEE_1278.1-1995.xml"
+         "D:\\Program Files\\Epic Games\\UE_4.25\\Engine\\Plugins\\coreDSModule\\Binaries\\Win64\\/DIS_V5_IEEE_1278.1-1995.xml"
       ],
       "FederateName" : "",
       "FederateType" : "",
@@ -135,13 +135,13 @@
                      "DeadReckoningAlgorithm" : "DR_Mode"
                   },
                   {
-                     "LinearAccelerationVelocity.XAcceleration" : "DR_LinearAccelerationX"
+                     "LinearVelocity.LinearAccelerationX" : "DR_LinearAccelerationX"
                   },
                   {
-                     "LinearAccelerationVelocity.YAcceleration" : "DR_LinearAccelerationY"
+                     "LinearVelocity.LinearAccelerationY" : "DR_LinearAccelerationY"
                   },
                   {
-                     "LinearAccelerationVelocity.ZAcceleration" : "DR_LinearAccelerationZ"
+                     "LinearVelocity.LinearAccelerationZ" : "DR_LinearAccelerationZ"
                   }
                ]
             },
@@ -284,13 +284,13 @@
                      "DeadReckoningAlgorithm" : "DRM(F, P, B)"
                   },
                   {
-                     "LinearAccelerationVelocity.XAcceleration" : "0"
+                     "LinearVelocity.LinearAccelerationX" : "0"
                   },
                   {
-                     "LinearAccelerationVelocity.YAcceleration" : "0"
+                     "LinearVelocity.LinearAccelerationY" : "0"
                   },
                   {
-                     "LinearAccelerationVelocity.ZAcceleration" : "0"
+                     "LinearVelocity.LinearAccelerationZ" : "0"
                   },
                   {
                      "OtherParameters" : "0"
@@ -501,13 +501,13 @@
                      "DeadReckoningAlgorithm" : "DRM(F, P, B)"
                   },
                   {
-                     "LinearAccelerationVelocity.XAcceleration" : "0"
+                     "LinearVelocity.LinearAccelerationX" : "0"
                   },
                   {
-                     "LinearAccelerationVelocity.YAcceleration" : "0"
+                     "LinearVelocity.LinearAccelerationY" : "0"
                   },
                   {
-                     "LinearAccelerationVelocity.ZAcceleration" : "0"
+                     "LinearVelocity.LinearAccelerationZ" : "0"
                   },
                   {
                      "OtherParameters" : "0"
