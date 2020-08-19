@@ -5,6 +5,7 @@
       "DISAppNumber" : 3001,
       "DISDestinationAddress" : "192.168.1.255",
       "DISDisVer" : 5,
+      "DISEnableExpertMode" : false,
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
       "DISMulticastAddress" : "0.0.0.0",
@@ -29,7 +30,7 @@
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
-         "D:\\Program Files\\Epic Games\\UE_4.25\\Engine\\Plugins\\coreDSModule\\Binaries\\Win64\\/DIS_V5_IEEE_1278.1-1995.xml"
+         "DIS_V5_IEEE_1278.1-1995.xml"
       ],
       "FederateName" : "",
       "FederateType" : "",
@@ -180,13 +181,13 @@
                      "On Data Received" : "convertPositionFromDIS.lua"
                   },
                   {
-                     "X" : "Location.x"
+                     "X" : "Location.X"
                   },
                   {
-                     "Y" : "Location.y"
+                     "Y" : "Location.Y"
                   },
                   {
-                     "Z" : "Location.z"
+                     "Z" : "Location.Z"
                   }
                ]
             },
@@ -199,13 +200,13 @@
                      "On Data Received" : "convertOrientationFromDIS.lua"
                   },
                   {
-                     "Phi" : "Orientation.yaw"
+                     "Phi" : "Orientation.phi"
                   },
                   {
-                     "Psi" : "Orientation.roll"
+                     "Psi" : "Orientation.psi"
                   },
                   {
-                     "Theta" : "Orientation.pitch"
+                     "Theta" : "Orientation.theta"
                   }
                ]
             }
@@ -376,13 +377,13 @@
                      "On Data Updated" : "convertUnrealPositionToDIS.lua"
                   },
                   {
-                     "X" : "Location.x"
+                     "X" : "Location.X"
                   },
                   {
-                     "Y" : "Location.y"
+                     "Y" : "Location.Y"
                   },
                   {
-                     "Z" : "Location.z"
+                     "Z" : "Location.Z"
                   }
                ]
             },
@@ -418,13 +419,13 @@
                      "On Data Updated" : "convertOrientationToDIS.lua"
                   },
                   {
-                     "Phi" : "Orientation.yaw"
+                     "Phi" : "Orientation.phi"
                   },
                   {
-                     "Psi" : "Orientation.roll"
+                     "Psi" : "Orientation.psi"
                   },
                   {
-                     "Theta" : "Orientation.pitch"
+                     "Theta" : "Orientation.theta"
                   }
                ]
             }
@@ -593,13 +594,13 @@
                      "On Data Updated" : "convertUnrealPositionToDIS.lua"
                   },
                   {
-                     "X" : "Location.x"
+                     "X" : "Location.X"
                   },
                   {
-                     "Y" : "Location.y"
+                     "Y" : "Location.Y"
                   },
                   {
-                     "Z" : "Location.z"
+                     "Z" : "Location.Z"
                   }
                ]
             },
@@ -635,13 +636,13 @@
                      "On Data Updated" : "convertOrientationToDIS.lua"
                   },
                   {
-                     "Phi" : "Orientation.yaw"
+                     "Phi" : "Orientation.phi"
                   },
                   {
-                     "Psi" : "Orientation.roll"
+                     "Psi" : "Orientation.psi"
                   },
                   {
-                     "Theta" : "Orientation.pitch"
+                     "Theta" : "Orientation.theta"
                   }
                ]
             }

@@ -1,0 +1,408 @@
+{
+   "ConfigType" : 0,
+   "DISConfig" : {
+      "AutomaticEntityStateUpdateManagement" : false,
+      "DISAppNumber" : 0,
+      "DISDestinationAddress" : "192.168.1.255",
+      "DISDisVer" : 5,
+      "DISEnableExpertMode" : false,
+      "DISExerciseID" : 1,
+      "DISJoinMulticastGroup" : false,
+      "DISMulticastAddress" : "0.0.0.0",
+      "DISNIA" : "192.168.1.76",
+      "DISPort" : 0,
+      "DISRcvBuffSize" : 2048,
+      "DISSiteNumber" : 1,
+      "DISUseAsyncIO" : false,
+      "EntityStatePDUUpdateFrequency" : 0,
+      "KeepAliveTimeout" : 5,
+      "SendCompleteEntityStatePDUPeriodically" : false,
+      "UseESUForKeepAlive" : false
+   },
+   "Federate" : {
+      "CreateFederationExecution" : true,
+      "DeleteFederationExecution" : true,
+      "DiscoverEverything" : false,
+      "DisplayReceivedCallbacks" : true,
+      "EnableAsynchronousDelivery" : false,
+      "EnableProvideAttributeValues" : false,
+      "EnableSynchronization" : false,
+      "EnableTimeConstrained" : false,
+      "EnableTimeRegulation" : false,
+      "FOMFileList" : [ "D:/code/ds.tools_git/coreUnrealAutomaticMode/Config/RPR_v2.0.xml" ],
+      "FederateName" : "Player1",
+      "FederateType" : "Unreal",
+      "FederationName" : "Unreal",
+      "HLACallbackDeliveryMecanism" : "HLA_EVOKED",
+      "LogicalTimeImplementationName" : "Double",
+      "LookAhead" : "0.10",
+      "MIMmodule" : "",
+      "MaximumCallbackTime" : 0.10,
+      "MinimumCallbackTime" : 0.0,
+      "ObjectPublishList" : [
+         {
+            "Attributes" : [ "EntityType", "Spatial" ],
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human"
+         },
+         {
+            "Attributes" : [ "EntityType", "Spatial" ],
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
+         }
+      ],
+      "ObjectSubcribeList" : [
+         {
+            "Attributes" : [ "EntityType", "Spatial" ],
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human"
+         },
+         {
+            "Attributes" : [ "EntityType", "Spatial" ],
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
+         }
+      ],
+      "RegisterSynchronizationPoint" : false,
+      "RequestAttributeValuesUpdate" : true,
+      "ResignAction" : "Delete Objects",
+      "StartAtGALT" : false,
+      "SynchronizationPointName" : "SyncPoint",
+      "TimeStep" : "1.00"
+   },
+   "Metadata" : {
+      "FedInfoAppDom" : "",
+      "FedInfoMOMVer" : "",
+      "FedInfoModDate" : "",
+      "FedInfoName" : "",
+      "FedInfoPurposes" : "",
+      "FedInfoSponsor" : "",
+      "FedInfoType" : "",
+      "FedInfoVersion" : "",
+      "POCEmail" : "",
+      "POCFirstName" : "",
+      "POCHonorName" : "",
+      "POCLastName" : "",
+      "POCOrganisationName" : "",
+      "POCPhoneNumber" : ""
+   },
+   "ObjectLinkSimLocalIn" : [
+      {
+         "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human" : [ "AutomaticMode" ]
+      },
+      {
+         "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition" : [ "AutomaticMode" ]
+      }
+   ],
+   "ObjectLinkSimLocalOut" : [
+      {
+         "Bullet" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
+      },
+      {
+         "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human"
+      }
+   ],
+   "ObjectMappingIn" : [
+      {
+         "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human" : [
+            {
+               "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human" : "AutomaticMode"
+            },
+            {
+               "EntityType" : [
+                  {
+                     "On Data Received" : "UseEntityTypeAsUniqueIdentifier.lua"
+                  }
+               ]
+            },
+            {
+               "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human" : "AutomaticMode"
+            },
+            {
+               "Spatial" : [
+                  {
+                     "AccelerationVector.XAcceleration" : "DR_LinearAccelerationX"
+                  },
+                  {
+                     "AccelerationVector.YAcceleration" : "DR_LinearAccelerationY"
+                  },
+                  {
+                     "AccelerationVector.ZAcceleration" : "DR_LinearAccelerationZ"
+                  },
+                  {
+                     "AngularVelocity.XAngularVelocity" : "DR_AngularVelocityX"
+                  },
+                  {
+                     "AngularVelocity.YAngularVelocity" : "DR_AngularVelocityY"
+                  },
+                  {
+                     "AngularVelocity.ZAngularVelocity" : "DR_AngularVelocityZ"
+                  },
+                  {
+                     "DeadReckoningAlgorithm" : "DR_Mode"
+                  },
+                  {
+                     "On Data Received" : "convertPositionFromHLA.lua"
+                  },
+                  {
+                     "Orientation.Phi" : "Orientation.phi"
+                  },
+                  {
+                     "Orientation.Psi" : "Orientation.psi"
+                  },
+                  {
+                     "Orientation.Theta" : "Orientation.theta"
+                  },
+                  {
+                     "VelocityVector.XVelocity" : "DR_LinearVelocityX"
+                  },
+                  {
+                     "VelocityVector.YVelocity" : "DR_LinearVelocityY"
+                  },
+                  {
+                     "VelocityVector.ZVelocity" : "DR_LinearVelocityZ"
+                  },
+                  {
+                     "WorldLocation.X" : "Location.X"
+                  },
+                  {
+                     "WorldLocation.Y" : "Location.Y"
+                  },
+                  {
+                     "WorldLocation.Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition" : [
+            {
+               "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition" : "AutomaticMode"
+            },
+            {
+               "EntityType" : [
+                  {
+                     "On Data Received" : "UseEntityTypeAsUniqueIdentifier.lua"
+                  }
+               ]
+            },
+            {
+               "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition" : "AutomaticMode"
+            },
+            {
+               "Spatial" : [
+                  {
+                     "AccelerationVector.XAcceleration" : "DR_LinearAccelerationX"
+                  },
+                  {
+                     "AccelerationVector.YAcceleration" : "DR_LinearAccelerationY"
+                  },
+                  {
+                     "AccelerationVector.ZAcceleration" : "DR_LinearAccelerationZ"
+                  },
+                  {
+                     "AngularVelocity.XAngularVelocity" : "DR_AngularVelocityX"
+                  },
+                  {
+                     "AngularVelocity.YAngularVelocity" : "DR_AngularVelocityY"
+                  },
+                  {
+                     "AngularVelocity.ZAngularVelocity" : "DR_AngularVelocityZ"
+                  },
+                  {
+                     "DeadReckoningAlgorithm" : "DR_Mode"
+                  },
+                  {
+                     "On Data Received" : "convertPositionFromHLA.lua"
+                  },
+                  {
+                     "Orientation.Phi" : "Orientation.phi"
+                  },
+                  {
+                     "Orientation.Psi" : "Orientation.psi"
+                  },
+                  {
+                     "Orientation.Theta" : "Orientation.theta"
+                  },
+                  {
+                     "VelocityVector.XVelocity" : "DR_LinearVelocityX"
+                  },
+                  {
+                     "VelocityVector.YVelocity" : "DR_LinearVelocityY"
+                  },
+                  {
+                     "VelocityVector.ZVelocity" : "DR_LinearVelocityZ"
+                  },
+                  {
+                     "WorldLocation.X" : "Location.X"
+                  },
+                  {
+                     "WorldLocation.Y" : "Location.Y"
+                  },
+                  {
+                     "WorldLocation.Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
+   "ObjectMappingOut" : [
+      {
+         "Bullet" : [
+            {
+               "Bullet" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
+            },
+            {
+               "EntityType" : [
+                  {
+                     "Category" : "1"
+                  },
+                  {
+                     "CountryCode" : "1"
+                  },
+                  {
+                     "Domain" : "1"
+                  },
+                  {
+                     "EntityKind" : "2"
+                  },
+                  {
+                     "Extra" : "0"
+                  },
+                  {
+                     "Specific" : "0"
+                  },
+                  {
+                     "Subcategory" : "1"
+                  }
+               ]
+            },
+            {
+               "Bullet" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
+            },
+            {
+               "Spatial" : [
+                  {
+                     "DeadReckoningAlgorithm" : "Static"
+                  },
+                  {
+                     "IsFrozen" : "False"
+                  },
+                  {
+                     "On Data Updated" : "convertUnrealPositionToHLA.lua"
+                  },
+                  {
+                     "Orientation.Phi" : "Orientation.phi"
+                  },
+                  {
+                     "Orientation.Psi" : "Orientation.psi"
+                  },
+                  {
+                     "Orientation.Theta" : "Orientation.theta"
+                  },
+                  {
+                     "WorldLocation.X" : "Location.X"
+                  },
+                  {
+                     "WorldLocation.Y" : "Location.Y"
+                  },
+                  {
+                     "WorldLocation.Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "Gun" : [
+            {
+               "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human"
+            },
+            {
+               "EntityType" : [
+                  {
+                     "Category" : "4"
+                  },
+                  {
+                     "CountryCode" : "3"
+                  },
+                  {
+                     "Domain" : "2"
+                  },
+                  {
+                     "EntityKind" : "3"
+                  },
+                  {
+                     "Extra" : "0"
+                  },
+                  {
+                     "Specific" : "0"
+                  },
+                  {
+                     "Subcategory" : "5"
+                  }
+               ]
+            },
+            {
+               "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human"
+            },
+            {
+               "Spatial" : [
+                  {
+                     "AccelerationVector.XAcceleration" : "0"
+                  },
+                  {
+                     "AccelerationVector.YAcceleration" : "0"
+                  },
+                  {
+                     "AccelerationVector.ZAcceleration" : "0"
+                  },
+                  {
+                     "DeadReckoningAlgorithm" : "DRM_FVW"
+                  },
+                  {
+                     "IsFrozen" : "False"
+                  },
+                  {
+                     "On Data Updated" : "convertUnrealPositionToHLA.lua"
+                  },
+                  {
+                     "Orientation.Phi" : "Orientation.phi"
+                  },
+                  {
+                     "Orientation.Psi" : "Orientation.psi"
+                  },
+                  {
+                     "Orientation.Theta" : "Orientation.theta"
+                  },
+                  {
+                     "VelocityVector.XVelocity" : "0"
+                  },
+                  {
+                     "VelocityVector.YVelocity" : "0"
+                  },
+                  {
+                     "VelocityVector.ZVelocity" : "0"
+                  },
+                  {
+                     "WorldLocation.X" : "Location.X"
+                  },
+                  {
+                     "WorldLocation.Y" : "Location.Y"
+                  },
+                  {
+                     "WorldLocation.Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
+   "RTIConfiguration" : {
+      "Compiler" : "VC140",
+      "DLLName" : "DLC_1516e_VC140_x64.dll",
+      "LocalDesignatorsExtra" : "",
+      "Manufacturer" : "DLC",
+      "OverEncDecFOM" : "",
+      "RTILibPath" : "",
+      "Standard" : "1516e"
+   }
+}

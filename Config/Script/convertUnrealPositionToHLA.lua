@@ -6,9 +6,9 @@ function convertUnrealPositionToHLA ()
 
 -- Since we are working over a fairly small part of the planet, we can assume a flat surface
 --convert lat/long to geocentric
-DSimLocal.WorldLocation.X, DSimLocal.WorldLocation.Y, DSimLocal.WorldLocation.Z = EnuToEcef(DSimLocal.WorldLocation.X/100, DSimLocal.WorldLocation.Y/100, DSimLocal.WorldLocation.Z/100, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
+DSimLocal.WorldLocation.X, DSimLocal.WorldLocation.Y, DSimLocal.WorldLocation.Z = EnuToEcef(DSimLocal.WorldLocation.Y, DSimLocal.WorldLocation.X, DSimLocal.WorldLocation.Z, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
-lat, lon, alt = ecef2lla(DSimLocal.WorldLocation.X ,DSimLocal.WorldLocation.Y , DSimLocal.WorldLocation.Z)
+lat, lon, alt = ecef2lla(DSimLocal.WorldLocation.Y ,DSimLocal.WorldLocation.X , DSimLocal.WorldLocation.Z)
 
 lat = math.rad(lat)
 lon = math.rad(lon)

@@ -180,13 +180,13 @@
                      "On Data Received" : "convertPositionFromDIS.lua"
                   },
                   {
-                     "X" : "Location.x"
+                     "X" : "Location.X"
                   },
                   {
-                     "Y" : "Location.y"
+                     "Y" : "Location.Y"
                   },
                   {
-                     "Z" : "Location.z"
+                     "Z" : "Location.Z"
                   }
                ]
             },
@@ -199,13 +199,13 @@
                      "On Data Received" : "convertOrientationFromDIS.lua"
                   },
                   {
-                     "Phi" : "Orientation.yaw"
+                     "Phi" : "Orientation.phi"
                   },
                   {
-                     "Psi" : "Orientation.roll"
+                     "Psi" : "Orientation.psi"
                   },
                   {
-                     "Theta" : "Orientation.pitch"
+                     "Theta" : "Orientation.theta"
                   }
                ]
             }

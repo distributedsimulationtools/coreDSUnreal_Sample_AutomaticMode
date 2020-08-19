@@ -2,10 +2,6 @@ angleConversions = require("angleConversions")
 require("ecef2lla")
 require("ReferenceLatLongAlt")
 
-lastPositionX = 0
-lastPositionY = 0
-lastPositionZ = 0
-
 function convertPositionFromHLA()
 
 --convert orientation
@@ -22,17 +18,7 @@ DSimLocal.Orientation.Psi =  angleConversions.getOrientationFromEuler(lat, lon, 
 DSimLocal.Orientation.Theta = angleConversions.getPitchFromEuler(lat, lon, psi, theta)
 DSimLocal.Orientation.Phi = angleConversions.getRollFromEuler(lat, lon, psi, theta, phi)
 
-
 --- convert position
-
-lastPositionX = DSimLocal.WorldLocation.X
-lastPositionY = DSimLocal.WorldLocation.Y
-lastPositionZ = DSimLocal.WorldLocation.Z
-
-DSimLocal.WorldLocation.X, DSimLocal.WorldLocation.Y,  DSimLocal.WorldLocation.Z = EcefToEnu(DSimLocal.WorldLocation.X, DSimLocal.WorldLocation.Y, DSimLocal.WorldLocation.Z, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
-
-DSimLocal.WorldLocation.X = DSimLocal.WorldLocation.X * 100
-DSimLocal.WorldLocation.Y = DSimLocal.WorldLocation.Y * 100
-DSimLocal.WorldLocation.Z = DSimLocal.WorldLocation.Z * 100
+DSimLocal.WorldLocation.Y, DSimLocal.WorldLocation.X,  DSimLocal.WorldLocation.Z = EcefToEnu(DSimLocal.WorldLocation.X, DSimLocal.WorldLocation.Y, DSimLocal.WorldLocation.Z, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
 end
