@@ -31,7 +31,7 @@
       "EnableTimeRegulation" : false,
       "FOMFileList" : [ "D:/code/ds.tools_git/coreUnrealAutomaticMode/Config/RPR_v2.0.xml" ],
       "FederateName" : "Player2",
-      "FederateType" : "Unreal",
+      "FederateType" : "Player2",
       "FederationName" : "Unreal",
       "HLACallbackDeliveryMecanism" : "HLA_EVOKED",
       "LogicalTimeImplementationName" : "Double",
@@ -42,7 +42,7 @@
       "ObjectPublishList" : [
          {
             "Attributes" : [ "EntityType", "Spatial" ],
-            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human"
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
          },
          {
             "Attributes" : [ "EntityType", "Spatial" ],
@@ -52,7 +52,7 @@
       "ObjectSubcribeList" : [
          {
             "Attributes" : [ "EntityType", "Spatial" ],
-            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human"
+            "Object" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
          },
          {
             "Attributes" : [ "EntityType", "Spatial" ],
@@ -84,7 +84,7 @@
    },
    "ObjectLinkSimLocalIn" : [
       {
-         "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human" : [ "AutomaticMode" ]
+         "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform" : [ "AutomaticMode" ]
       },
       {
          "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition" : [ "AutomaticMode" ]
@@ -95,14 +95,14 @@
          "Bullet" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Munition"
       },
       {
-         "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human"
+         "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
       }
    ],
    "ObjectMappingIn" : [
       {
-         "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human" : [
+         "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform" : [
             {
-               "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human" : "AutomaticMode"
+               "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform" : "AutomaticMode"
             },
             {
                "EntityType" : [
@@ -112,7 +112,7 @@
                ]
             },
             {
-               "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human" : "AutomaticMode"
+               "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform" : "AutomaticMode"
             },
             {
                "Spatial" : [
@@ -314,7 +314,7 @@
       {
          "Gun" : [
             {
-               "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human"
+               "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
             },
             {
                "EntityType" : [
@@ -341,6 +341,44 @@
                   }
                ]
             },
+            {
+               "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform"
+            },
+            {
+               "Spatial" : [
+                  {
+                     "DeadReckoningAlgorithm" : "Static"
+                  },
+                  {
+                     "IsFrozen" : "False"
+                  },
+                  {
+                     "On Data Updated" : "convertUnrealPositionToHLA.lua"
+                  },
+                  {
+                     "Orientation.Phi" : "Orientation.phi"
+                  },
+                  {
+                     "Orientation.Psi" : "Orientation.psi"
+                  },
+                  {
+                     "Orientation.Theta" : "Orientation.theta"
+                  },
+                  {
+                     "WorldLocation.X" : "Location.X"
+                  },
+                  {
+                     "WorldLocation.Y" : "Location.Y"
+                  },
+                  {
+                     "WorldLocation.Z" : "Location.Z"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "Gun" : [
             {
                "Gun" : "HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human"
             },
@@ -397,8 +435,8 @@
       }
    ],
    "RTIConfiguration" : {
-      "Compiler" : "VC140",
-      "DLLName" : "DLC_1516e_VC140_x64.dll",
+      "Compiler" : "VC141",
+      "DLLName" : "DLC_1516e_VC141_x64.dll",
       "LocalDesignatorsExtra" : "",
       "Manufacturer" : "DLC",
       "OverEncDecFOM" : "",
