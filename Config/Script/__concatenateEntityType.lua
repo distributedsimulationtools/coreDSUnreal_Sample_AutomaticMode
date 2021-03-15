@@ -19,8 +19,17 @@ function __concatenateEntityType(DSimLocal)
 		else
 			tmp = tmp .. "." .. DSimLocal.Domain
 		end
-		tmp = tmp .. "." .. DSimLocal.CountryCode
-		tmp = tmp .. "." .. DSimLocal.Category
+		if (DSimLocal.Domain.CountryCode) then
+			tmp = tmp .. "." .. DSimLocal.Domain.CountryCode
+		else
+			tmp = tmp .. "." .. DSimLocal.CountryCode
+		end
+		
+		if (DSimLocal.Domain.Category) then
+			tmp = tmp .. "." .. DSimLocal.Domain.Category
+		else
+			tmp = tmp .. "." .. DSimLocal.Category
+		end
 	end
 		
 	tmp = tmp .. "." .. DSimLocal.Subcategory
