@@ -1,7 +1,7 @@
 
 require("__concatenateEntityType")
 
-function UseEntityTypeAsUniqueIdentifier()
+function UseEntityTypeAsUniqueIdentifier(value)
 	-- Available variables
 	-- DSimLocal.Category
 	-- DSimLocal.CountryCode
@@ -14,5 +14,7 @@ function UseEntityTypeAsUniqueIdentifier()
 	-- DSimLocal.Specific
 	-- DSimLocal.Subcategory
 
-	DSimLocal.UniqueIdentifier = __concatenateEntityType(DSimLocal)
+	newvars = CVariant:new()
+	newvars['UniqueIdentifier']:set(__concatenateEntityType(value))
+	return _, newvars;
 end

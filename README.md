@@ -1,7 +1,9 @@
 # coreUnrealAutomaticMode
-This is a Sample project to be used with coreDS Unreal and the Unreal Engine 4. You can request a free trial on https://www.ds.tools/contact-us/trial-request/
+This is a Sample project to be used with coreDS Unreal and the Unreal Engine 5. You can request a free trial on https://www.ds.tools/contact-us/trial-request/
 
 coreDS Unreal must already be installed and activated in order to use this project. Please make sure the coreDS Unreal plugin is enabled.
+
+This sample is compatible with the Unreal Engine 5+. A version compatible with UE4.24+ can be found in a different branch.
 
 This sample showcase the Automatic Object Management mode. The Automatic Mode management the complete life-cycle of discovered objects allowing an easy eay to receive information from DIS or HLA. You can add receive ans send DIS/HLA objects within a few minutes.
 

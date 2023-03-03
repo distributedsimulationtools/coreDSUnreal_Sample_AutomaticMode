@@ -1,61 +1,69 @@
 {
    "ConfigType" : 1,
    "DISConfig" : {
-      "AutomaticEntityStateUpdateManagement" : false,
+      "AutomaticEntityStateUpdateManagement" : true,
       "DISAppNumber" : 3001,
-      "DISDestinationAddress" : "192.168.1.255",
+      "DISDestinationAddress" : "10.0.0.255",
       "DISDisVer" : 5,
-      "DISEnableExpertMode" : false,
+      "DISEnableExpertMode" : true,
       "DISExerciseID" : 1,
       "DISJoinMulticastGroup" : false,
       "DISMulticastAddress" : "0.0.0.0",
-      "DISNIA" : "192.168.1.76",
+      "DISNIA" : "10.0.0.70",
       "DISPort" : 3000,
       "DISRcvBuffSize" : 2048,
       "DISSiteNumber" : 1,
       "DISUseAsyncIO" : false,
-      "EntityStatePDUUpdateFrequency" : 0,
+      "EntityStatePDUUpdateFrequency" : 1,
       "KeepAliveTimeout" : 5,
-      "SendCompleteEntityStatePDUPeriodically" : false,
-      "UseESUForKeepAlive" : false
+      "SendCompleteEntityStatePDUPeriodically" : true,
+      "UseESUForKeepAlive" : true
    },
    "Federate" : {
+      "CallbackReportingLevel" : 1,
+      "CallbacksToLog" : false,
       "CreateFederationExecution" : true,
       "DeleteFederationExecution" : true,
       "DiscoverEverything" : false,
-      "DisplayReceivedCallbacks" : false,
       "EnableAsynchronousDelivery" : false,
       "EnableProvideAttributeValues" : false,
       "EnableSynchronization" : false,
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
-         "DIS_V5_IEEE_1278.1-1995.xml"
+         "C:\\Program Files\\Epic Games\\UE_5.0\\Engine\\Plugins\\Marketplace\\Binaries\\Win64\\\\DIS_V5_IEEE_1278.1-1995_expert.xml"
       ],
       "FederateName" : "",
       "FederateType" : "",
       "FederationName" : "",
       "HLACallbackDeliveryMecanism" : "HLA_EVOKED",
+      "LogToFile" : {
+         "Destination" : "",
+         "Enabled" : 0,
+         "Filter" : "%Severity% >= error",
+         "MaxVerbose" : "%Severity% >= error"
+      },
       "LogicalTimeImplementationName" : "Double",
-      "LookAhead" : "0.10",
+      "LookAhead" : 0.10,
       "MIMmodule" : "",
       "MaximumCallbackTime" : 0.10,
       "MinimumCallbackTime" : 0.0,
       "ObjectPublishList" : [
          {
             "Attributes" : [
-               "AlternativeEntityType",
-               "Appearance",
-               "Capabilities",
-               "DeadReckoning",
                "EntityID",
-               "EntityType",
                "ForceID",
+               "NumberOfVariableParameters",
+               "EntityType",
+               "AlternativeEntityType",
                "LinearVelocity",
                "LocationInWorldCoordinates",
+               "Orientation",
+               "Appearance",
+               "DeadReckoning",
                "Marking",
-               "NumberOfArticulation",
-               "Orientation"
+               "Capabilities",
+               "VariableParameters"
             ],
             "Object" : "DISobject.Entity State"
          }
@@ -63,28 +71,30 @@
       "ObjectSubcribeList" : [
          {
             "Attributes" : [
-               "AlternativeEntityType",
-               "Appearance",
-               "Capabilities",
-               "DeadReckoning",
                "EntityID",
-               "EntityType",
                "ForceID",
+               "NumberOfVariableParameters",
+               "EntityType",
+               "AlternativeEntityType",
                "LinearVelocity",
                "LocationInWorldCoordinates",
+               "Orientation",
+               "Appearance",
+               "DeadReckoning",
                "Marking",
-               "NumberOfArticulation",
-               "Orientation"
+               "Capabilities",
+               "VariableParameters"
             ],
             "Object" : "DISobject.Entity State"
          }
       ],
+      "OptionalFOMFileList" : null,
       "RegisterSynchronizationPoint" : false,
       "RequestAttributeValuesUpdate" : true,
       "ResignAction" : "Delete Objects",
       "StartAtGALT" : false,
       "SynchronizationPointName" : "SyncPoint",
-      "TimeStep" : "1.00"
+      "TimeStep" : 1.0
    },
    "Metadata" : {
       "FedInfoAppDom" : "",
@@ -109,9 +119,6 @@
    ],
    "ObjectLinkSimLocalOut" : [
       {
-         "Bullet" : "DISobject.Entity State"
-      },
-      {
          "Gun" : "DISobject.Entity State"
       }
    ],
@@ -122,27 +129,9 @@
                "DISobject.Entity State" : "AutomaticMode"
             },
             {
-               "DeadReckoning" : [
+               "DISobject.Entity State" : [
                   {
-                     "AngularVelocity.XAngularVelocity" : "DR_AngularVelocityX"
-                  },
-                  {
-                     "AngularVelocity.YAngularVelocity" : "DR_AngularVelocityY"
-                  },
-                  {
-                     "AngularVelocity.ZAngularVelocity" : "DR_AngularVelocityZ"
-                  },
-                  {
-                     "DeadReckoningAlgorithm" : "DR_Mode"
-                  },
-                  {
-                     "LinearVelocity.LinearAccelerationX" : "DR_LinearAccelerationX"
-                  },
-                  {
-                     "LinearVelocity.LinearAccelerationY" : "DR_LinearAccelerationY"
-                  },
-                  {
-                     "LinearVelocity.LinearAccelerationZ" : "DR_LinearAccelerationZ"
+                     "On Item Updated" : "convertPositionFromDISToUnreal.lua"
                   }
                ]
             },
@@ -160,26 +149,7 @@
                "DISobject.Entity State" : "AutomaticMode"
             },
             {
-               "LinearVelocity" : [
-                  {
-                     "XVelocity" : "DR_LinearVelocityX"
-                  },
-                  {
-                     "YVelocity" : "DR_LinearVelocityY"
-                  },
-                  {
-                     "ZVelocity" : "DR_LinearVelocityZ"
-                  }
-               ]
-            },
-            {
-               "DISobject.Entity State" : "AutomaticMode"
-            },
-            {
                "LocationInWorldCoordinates" : [
-                  {
-                     "On Data Received" : "convertPositionFromDIS.lua"
-                  },
                   {
                      "X" : "Location.X"
                   },
@@ -197,7 +167,7 @@
             {
                "Orientation" : [
                   {
-                     "On Data Received" : "convertOrientationFromDIS.lua"
+                     "On Data Received" : ""
                   },
                   {
                      "Phi" : "Orientation.phi"
@@ -215,223 +185,6 @@
    ],
    "ObjectMappingOut" : [
       {
-         "Bullet" : [
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "AlternativeEntityType" : [
-                  {
-                     "Category" : "Ballistic"
-                  },
-                  {
-                     "CountryCode" : "Canada"
-                  },
-                  {
-                     "Domain" : "Tactical"
-                  },
-                  {
-                     "EntityKind" : "Munition"
-                  },
-                  {
-                     "Extra" : "0"
-                  },
-                  {
-                     "Specific" : "0"
-                  },
-                  {
-                     "Subcategory" : "Armor-piercing hit"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "Appearance" : [
-                  {
-                     "GeneralAppearance.Value" : "0"
-                  },
-                  {
-                     "SpecificAppearance.Value" : "0"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "Capabilities" : [
-                  {
-                     "Capabilities" : "0"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "DeadReckoning" : [
-                  {
-                     "AngularVelocity.XAngularVelocity" : "0"
-                  },
-                  {
-                     "AngularVelocity.YAngularVelocity" : "0"
-                  },
-                  {
-                     "AngularVelocity.ZAngularVelocity" : "0"
-                  },
-                  {
-                     "DeadReckoningAlgorithm" : "DRM(F, P, B)"
-                  },
-                  {
-                     "LinearVelocity.LinearAccelerationX" : "0"
-                  },
-                  {
-                     "LinearVelocity.LinearAccelerationY" : "0"
-                  },
-                  {
-                     "LinearVelocity.LinearAccelerationZ" : "0"
-                  },
-                  {
-                     "OtherParameters" : "0"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "EntityID" : [
-                  {
-                     "EntityIdentify" : "Automatic Generated Object ID"
-                  },
-                  {
-                     "SimulationAddress.ApplicationID" : "Configured Application Number"
-                  },
-                  {
-                     "SimulationAddress.SiteID" : "Configured Site Number"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "EntityType" : [
-                  {
-                     "Category" : "Ballistic"
-                  },
-                  {
-                     "CountryCode" : "Canada"
-                  },
-                  {
-                     "Domain" : "Anti-Armor"
-                  },
-                  {
-                     "EntityKind" : "Munition"
-                  },
-                  {
-                     "Extra" : "0"
-                  },
-                  {
-                     "Specific" : "0"
-                  },
-                  {
-                     "Subcategory" : "Ground Impact"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "ForceID" : [
-                  {
-                     "ForceID" : "Friendly"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "LinearVelocity" : [
-                  {
-                     "XVelocity" : "0"
-                  },
-                  {
-                     "YVelocity" : "0"
-                  },
-                  {
-                     "ZVelocity" : "0"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "LocationInWorldCoordinates" : [
-                  {
-                     "On Data Updated" : "convertUnrealPositionToDIS.lua"
-                  },
-                  {
-                     "X" : "Location.X"
-                  },
-                  {
-                     "Y" : "Location.Y"
-                  },
-                  {
-                     "Z" : "Location.Z"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "Marking" : [
-                  {
-                     "MarkingData" : "'BulletP1'"
-                  },
-                  {
-                     "MarkingEncodingType" : "ASCII"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "NumberOfArticulation" : [
-                  {
-                     "NumberOfArticulation" : "0"
-                  }
-               ]
-            },
-            {
-               "Bullet" : "DISobject.Entity State"
-            },
-            {
-               "Orientation" : [
-                  {
-                     "On Data Updated" : "convertOrientationToDIS.lua"
-                  },
-                  {
-                     "Phi" : "Orientation.phi"
-                  },
-                  {
-                     "Psi" : "Orientation.psi"
-                  },
-                  {
-                     "Theta" : "Orientation.theta"
-                  }
-               ]
-            }
-         ]
-      },
-      {
          "Gun" : [
             {
                "Gun" : "DISobject.Entity State"
@@ -439,25 +192,25 @@
             {
                "AlternativeEntityType" : [
                   {
-                     "Category" : "0"
+                     "Category" : 0
                   },
                   {
-                     "CountryCode" : "Canada"
+                     "CountryCode" : 0
                   },
                   {
-                     "Domain" : "Land"
+                     "Domain" : 1
                   },
                   {
-                     "EntityKind" : "Lifeform"
+                     "EntityKind" : 3
                   },
                   {
-                     "Extra" : "0"
+                     "Extra" : 0
                   },
                   {
-                     "Specific" : "0"
+                     "Specific" : 0
                   },
                   {
-                     "Subcategory" : "0"
+                     "Subcategory" : 0
                   }
                ]
             },
@@ -467,10 +220,7 @@
             {
                "Appearance" : [
                   {
-                     "GeneralAppearance.Value" : "0"
-                  },
-                  {
-                     "SpecificAppearance.Value" : "0"
+                     "Appearance" : 0
                   }
                ]
             },
@@ -480,7 +230,7 @@
             {
                "Capabilities" : [
                   {
-                     "Capabilities" : "0"
+                     "Capabilities" : 0
                   }
                ]
             },
@@ -490,25 +240,25 @@
             {
                "DeadReckoning" : [
                   {
-                     "AngularVelocity.XAngularVelocity" : "0"
+                     "AngularVelocity.XAngularVelocity" : 0.0
                   },
                   {
-                     "AngularVelocity.YAngularVelocity" : "0"
+                     "AngularVelocity.YAngularVelocity" : 0.0
                   },
                   {
-                     "AngularVelocity.ZAngularVelocity" : "0"
+                     "AngularVelocity.ZAngularVelocity" : 0.0
                   },
                   {
-                     "DeadReckoningAlgorithm" : "DRM(F, P, B)"
+                     "DeadReckoningAlgorithm" : 0
                   },
                   {
-                     "LinearVelocity.LinearAccelerationX" : "0"
+                     "LinearVelocity.LinearAccelerationX" : 0.0
                   },
                   {
-                     "LinearVelocity.LinearAccelerationY" : "0"
+                     "LinearVelocity.LinearAccelerationY" : 0.0
                   },
                   {
-                     "LinearVelocity.LinearAccelerationZ" : "0"
+                     "LinearVelocity.LinearAccelerationZ" : 0.0
                   },
                   {
                      "OtherParameters" : "0"
@@ -537,25 +287,25 @@
             {
                "EntityType" : [
                   {
-                     "Category" : "0"
+                     "Category" : 0
                   },
                   {
-                     "CountryCode" : "Canada"
+                     "CountryCode" : 0
                   },
                   {
-                     "Domain" : "Land"
+                     "Domain" : 1
                   },
                   {
-                     "EntityKind" : "Lifeform"
+                     "EntityKind" : 3
                   },
                   {
-                     "Extra" : "0"
+                     "Extra" : 0
                   },
                   {
-                     "Specific" : "0"
+                     "Specific" : 0
                   },
                   {
-                     "Subcategory" : "0"
+                     "Subcategory" : 0
                   }
                ]
             },
@@ -565,7 +315,7 @@
             {
                "ForceID" : [
                   {
-                     "ForceID" : "Friendly"
+                     "ForceID" : 3
                   }
                ]
             },
@@ -575,13 +325,13 @@
             {
                "LinearVelocity" : [
                   {
-                     "XVelocity" : "0"
+                     "XVelocity" : 0.0
                   },
                   {
-                     "YVelocity" : "0"
+                     "YVelocity" : 0.0
                   },
                   {
-                     "ZVelocity" : "0"
+                     "ZVelocity" : 0.0
                   }
                ]
             },
@@ -610,10 +360,10 @@
             {
                "Marking" : [
                   {
-                     "MarkingData" : "\"GunP1\""
+                     "MarkingData" : "GunAuto"
                   },
                   {
-                     "MarkingEncodingType" : "ASCII"
+                     "MarkingEncodingType" : 1
                   }
                ]
             },
@@ -621,9 +371,9 @@
                "Gun" : "DISobject.Entity State"
             },
             {
-               "NumberOfArticulation" : [
+               "NumberOfVariableParameters" : [
                   {
-                     "NumberOfArticulation" : "0"
+                     "NumberOfVariableParameters" : 0
                   }
                ]
             },
@@ -633,7 +383,7 @@
             {
                "Orientation" : [
                   {
-                     "On Data Updated" : "convertOrientationToDIS.lua"
+                     "On Data Updated" : "convertOrientationFromUnrealToDIS.lua"
                   },
                   {
                      "Phi" : "Orientation.phi"
@@ -643,6 +393,16 @@
                   },
                   {
                      "Theta" : "Orientation.theta"
+                  }
+               ]
+            },
+            {
+               "Gun" : "DISobject.Entity State"
+            },
+            {
+               "VariableParameters" : [
+                  {
+                     "VariableParameters" : "0"
                   }
                ]
             }
@@ -656,6 +416,8 @@
       "Manufacturer" : "",
       "OverEncDecFOM" : "",
       "RTILibPath" : "",
-      "Standard" : "DIS V5"
-   }
+      "Standard" : "DIS V5",
+      "SystemVariables" : null
+   },
+   "Version" : "3.0.217.Last_V1.5-187-gc0dd096e-dev"
 }
