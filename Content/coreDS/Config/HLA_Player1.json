@@ -27,7 +27,7 @@
       "DiscoverEverything" : false,
       "EnableAsynchronousDelivery" : false,
       "EnableProvideAttributeValues" : false,
-      "EnableSynchronization" : false,
+      "EnableSynchronization" : true,
       "EnableTimeConstrained" : false,
       "EnableTimeRegulation" : false,
       "FOMFileList" : [
@@ -101,6 +101,16 @@
                "HLAobjectRoot.BaseEntity.PhysicalEntity" : "AutomaticMode"
             },
             {
+               "Other Properties" : [
+                  {
+                     "Object Instance Name" : "UniqueIdentifier"
+                  }
+               ]
+            },
+            {
+               "HLAobjectRoot.BaseEntity.PhysicalEntity" : "AutomaticMode"
+            },
+            {
                "Spatial" : [
                   {
                      "On Data Received" : "convertUnrealPositionToHLA.lua"
@@ -166,14 +176,23 @@
       }
    ],
    "RTIConfiguration" : {
-      "Compiler" : "VC142",
-      "DLLName" : "Pitch_1516e_VC142_x64.dll",
+      "Compiler" : "VC141",
+      "DLLName" : "Mak_1516e_VC141_x64.dll",
       "LocalDesignatorsExtra" : "",
-      "Manufacturer" : "Pitch",
+      "Manufacturer" : "Mak",
       "OverEncDecFOM" : "",
       "RTILibPath" : "",
       "Standard" : "1516e",
-      "SystemVariables" : null
+      "SystemVariables" : {
+         "PATH" : {
+            "Append" : 1,
+            "Value" : "C:\\MAK\\makRti4.6\\bin;C:\\MAK\\makRti4.6\\bin\\gui"
+         },
+         "RTI_RID_FILE" : {
+            "Append" : 0,
+            "Value" : "C:\\MAK\\makRti4.6\\rid.mtl"
+         }
+      }
    },
-   "Version" : "3.0.217.Last_V1.5-187-gc0dd096e-dev"
+   "Version" : "3.0.220.Last_V1.5-190-g6369d740-dev"
 }
