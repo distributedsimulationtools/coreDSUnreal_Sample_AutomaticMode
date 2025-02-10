@@ -37,8 +37,8 @@
       "FOMFileList" : [
          "C:\\code\\ds.tools_git\\coreDSUnreal\\Samples\\coreDSUnreal_Sample_AutomaticMode\\Content\\coreDS\\RPR_v2.0.xml"
       ],
-      "FederateName" : "TestFed1",
-      "FederateType" : "TestFed1",
+      "FederateName" : "TestFed2",
+      "FederateType" : "TestFed2",
       "FederationName" : "coreDSUnreal",
       "HLACallbackDeliveryMecanism" : "HLA_EVOKED",
       "LogToFile" : {
