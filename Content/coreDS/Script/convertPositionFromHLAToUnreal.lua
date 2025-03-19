@@ -21,8 +21,7 @@ function convertPositionFromHLAToUnreal(value)
 	value['Orientation.Phi']:set(yaw)
 
 	--scale back from meter to cm
-	value['WorldLocation.X']:set(b/100)
-	value['WorldLocation.Y']:set(a/100)
-	value['WorldLocation.Z']:set(c/100)
-
+	value['WorldLocation.X']:set(b*100)
+	value['WorldLocation.Y']:set(a*100)
+	value['WorldLocation.Z']:set(c*100)
 end

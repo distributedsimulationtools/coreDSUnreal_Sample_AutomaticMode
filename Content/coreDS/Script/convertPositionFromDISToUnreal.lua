@@ -22,8 +22,8 @@ function convertPositionFromDISToUnreal(value)
 	value['Orientation.Phi']:set(yaw)
 
 	--scale back from meter to cm
-	value['LocationInWorldCoordinates.X']:set(b/100)
-	value['LocationInWorldCoordinates.Y']:set(a/100)
-	value['LocationInWorldCoordinates.Z']:set(c/100)
+	value['LocationInWorldCoordinates.X']:set(b*100)
+	value['LocationInWorldCoordinates.Y']:set(a*100)
+	value['LocationInWorldCoordinates.Z']:set(c*100)
 
 end
