@@ -74,7 +74,7 @@
       ],
       "OptionalFOMFileList" : null,
       "RegisterSynchronizationPoint" : false,
-      "RequestAttributeValuesUpdate" : true,
+      "RequestAttributeValuesUpdate" : false,
       "ResignAction" : "Delete Objects",
       "StartAtGALT" : false,
       "SynchronizationPointName" : "SyncPoint",
@@ -296,6 +296,6 @@
       "RTILibPath" : "",
       "Standard" : "1516e",
       "SystemVariables" : null
-   },
+         },
    "Version" : "3.0.512-dev"
 }
