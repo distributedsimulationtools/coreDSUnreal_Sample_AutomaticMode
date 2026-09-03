@@ -83,7 +83,7 @@ Distributed Interactive Simulation (DIS)
 
 For both configurations, it is important to configure the Configured Network Adapter. Click on the dropbox and select your active Network Adapter.
 
-.. image:: Doc/Images/DISConnectionConfiguration.png
+.. image:: Doc/Images/DISConnectionConfiguration.PNG
    :alt: Plugin DISConnectionConfiguration Screenshot
 
 Even if DIS does not explicitly support Subscription, coreDS supports incoming filtering. First, we must let coreDS know that we want to receive the EntityStatePDU. Publish PDUs that you want to send and subscribe to those you want to receive.
