@@ -14,7 +14,7 @@ function UseEntityTypeAsUniqueIdentifier(value)
 	-- DSimLocal.Specific
 	-- DSimLocal.Subcategory
 
-	newvars = CVariant:new()
+	local newvars = CVariant:new()
 	newvars['ObjectClassSelector']:set(__concatenateEntityType(value))
-	return _, newvars;
+	addNewVariables(newvars)
 end

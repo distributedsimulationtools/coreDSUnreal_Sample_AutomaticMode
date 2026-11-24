@@ -6,3 +6,5 @@ coreUnrealAutoMode.sln
 Plugins/
 _build
 Build
+package/
+Windows/

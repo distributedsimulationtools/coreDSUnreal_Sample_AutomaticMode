@@ -1,231 +1,226 @@
-coreUnrealAutomaticMode
-=======================
+Automatic Mode sample
+=====================
 
-This is a Sample project to be used with coreDS Unreal and Unreal Engine 5. You can request a free trial at https://www.ds.tools/contact-us/trial-request/
+This is a sample project to be used with coreDS Unreal and Unreal Engine 5.2 or later. You can request a free trial at https://www.ds.tools/contact-us/trial-request/
 
-coreDS Unreal must already be installed and activated to use this project. Please make sure the coreDS Unreal plugin is enabled.
+coreDS Unreal must already be installed and activated to use this project. coreDS Unreal is not enabled by default: the sample's ``coreUnrealAutoMode.uproject`` already enables it (``coreDSModule``). If you copy this setup to your own project, enable coreDS Unreal in Edit > Plugins, or list ``coreDSModule`` in your ``.uproject``.
 
-This sample is compatible with the Unreal Engine 5+. A version compatible with UE4.24+ can be found in a different branch.
+This sample showcases the Automatic Object Management mode. The Automatic Mode manages the complete life cycle of discovered objects, which makes it easy to receive information from DIS or HLA. You can receive and send DIS/HLA objects within a few minutes.
 
-This sample showcases the Automatic Object Management mode. The Automatic Mode manages the complete life-cycle of discovered objects allowing an easy way to receive information from DIS or HLA. You can add receive and send DIS/HLA objects within a few minutes.
+The sample project uses the following coreDS concepts:
 
-The Sample project uses the following coreDS concepts:
-
--  Connect
--  Disconnect
--  Send Update Object (send EntityStatePDU or UpdateAttributeValues,
-   DiscoverObjectInstance)
--  Receive Update Object (Receive EntityStatePDU or
-   UpdateAttributeValues)
--  Delete Objects (EntityStatePDU timeout or RemoveObjectInstance)
+- Connect
+- Disconnect
+- Send Update Object (send EntityStatePDU, or RegisterObjectInstance and UpdateAttributeValues)
+- Receive Update Object (receive EntityStatePDU, or DiscoverObjectInstance and ReflectAttributeValues)
+- Delete Objects (EntityStatePDU timeout or RemoveObjectInstance)
 
 Runtime commands:
 
--  Pressing K will stop the connection and then open the configuration selection window. This allows to change from one distributed simulation protocol to the other without having to close the application.
+- Pressing K stops the connection and opens the configuration selection window. This lets you switch from one distributed simulation protocol to the other without closing the application.
 
 Getting started
 ---------------
 
 The first step is to configure coreDS Unreal to enable the Automatic Mode.
 
-You can find that configuration from Edit->Project Settings->coreDS Unreal
+This configuration is in Edit > Project Settings > Plugins > coreDS, in the Automatic Mode category.
 
 .. image:: Doc/Images/AutomaticModeSettings.png
-   :alt: Plugin Configuration Screenshot
+   :alt: Automatic Mode settings
 
-Note the “UniqueIdentifier” field. We will come back to this later. For now, please note this field is a regex string. When the “UniqueIdentier” matches, the corresponding object is spawned. The first valid match will be used so you have to be careful to place your higher priority match at the beginning.
+Each entry of "Automatic Object Mode Mappings" has an "Object Class Selector": a list of regular expressions. When a received object's ObjectClassSelector value matches one of them, the entry's "Actor to Spawn" is spawned. The entries are checked in order and the first match is used, so place your higher priority entries first and a wildcard last.
 
-For each object, you can enable/disable collisions and physics. We recommend leaving the collision and physics disabled at first and enabling them afterwards when you can confirm the objects are spawned correctly.
+For each entry, you can enable or disable collisions and physics. We recommend leaving the collision and physics disabled at first, and enabling them once you have confirmed that the objects are spawned correctly.
 
-In this particular example, everything matching EntityType 3.x.x.x.x.x.x will spawn a FirstPersonCharter object and everything matching EntityType 2.x.x.x.x.x.x will spawn a FirstPersonProjectile.
+In this sample, every EntityType matching 3.x.x.x.x.x.x (life forms) spawns a ``FirstPersonCharacter`` and every EntityType matching 2.x.x.x.x.x.x (munitions) spawns a ``FirstPersonProjectile1``.
 
-The two objects are also configurated to send their position via DIS/HLA when spawned (configuration is shown below)
+The two local actors are also configured to send their position via DIS/HLA when spawned (the configuration is shown below).
 
-The complete object life-cycle is managed by coreDS Unreal, including DIS Keep-alive updates. Connect and disconnect will also be taken care of automatically.
+coreDS Unreal manages the complete object life cycle, including the DIS keep-alive updates. Connect and disconnect are also taken care of automatically.
 
-coreDS Unreal supports dead reckoning. You can enable it from the Plugin configuration Window by checking the “Enable Dead reckoning” box.
+coreDS Unreal supports dead reckoning. It is disabled in this sample: enable it by checking "Enable Deadreckoning" in the Automatic Mode category of the coreDS settings. For dead reckoning to work, the DR properties must also be mapped correctly (see below).
 
-For DR to work properly it must first be activated and the DR properties must be correctly mapped (see below)
+The next step is to configure an actual connection with a distributed simulation protocol. coreDS supports HLA (High-Level Architecture) and DIS (Distributed Interactive Simulation).
 
-The next step is to configure an actual connection with a Distributed Simulation protocol. coreDS supports HLA (High-Level Architecture)and DIS (Distributed Interaction Simulation).
-
-Special note to HLA Users
+Special note to HLA users
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-HLA can directly subscribe to very specific object classes without having to use a separate object type identification mechanism. coreDS Unreal provides two additional mechanisms to HLA users: You can also use the ObjectType (complete FOM denomination, HLAobjectRoot.BaseEntity…) or the Object Entity Name as the UniqueIdentifier. This allows to either generate actors directly based on the corresponding HLA Object Type or spawn a particular object based on its unique name (both mechanisms can’t be used at the same time; if you need to distinguish a particular object out of a group, please use the BluePrint interface).
+HLA can directly subscribe to very specific object classes without using a separate object type identification mechanism. coreDS Unreal provides two additional mechanisms to HLA users: you can also use the object class name (the complete FOM name, for example HLAobjectRoot.BaseEntity…) or the object instance name as the Object Class Selector. This lets you spawn actors based on the HLA object class, or spawn a particular object based on its unique name. The two mechanisms can't be used at the same time; if you need to distinguish a particular object out of a group, use the Blueprint interface.
 
 .. image:: ./Doc/Images/HLAOtherProperties.png
    :alt: HLA Other Properties
 
-When configuring an HLA connection, you can link the UniqueIdentifier property to the “Object Class Name” or the “Object Instance Name”.
+When configuring an HLA connection, you can link the ObjectClassSelector property to the "Object Class Name" or the "Object Instance Name".
 
-The “Object Class Name” contains the value of the GetObjectClassName() function.
+The "Object Class Name" contains the value of the GetObjectClassName() function.
 
-The “Object Instance Name” contains the value of the instance name, as received via the DiscoverObjectInstance callback.
+The "Object Instance Name" contains the instance name, as received in the DiscoverObjectInstance callback.
 
-You can open the configuration window either by running the game or by clicking on the coreDS toolbar button.
+You can open the configuration window either by running the game or from Tools > Distributed Simulation > coreDS Unreal > Show coreDS UI.
 
-This sample comes with 4 pre-configured settings:
-   DIS_Player1: DIS v6
-   DIS_Player2: DIS v6
-   HLA_Player1: HLA 1516e with RPRFOM 2.0
-   HLA_Player2: HLA 1516e with RPRFOM 2.0
+This sample comes with 3 preconfigured configurations, in ``Content/coreDS``:
+
+- ``DIS.coreDS``: DIS v5
+- ``HLA_Player1.coreDS``: HLA 1516e with the RPR FOM 2.0
+- ``HLA_Player2.coreDS``: HLA 1516e with the RPR FOM 2.0
 
 .. image:: Doc/Images/ConfigurationSelection.png
-   :alt: Plugin ConfigurationSelection Screenshot
+   :alt: Configuration selection window
 
-Let’s take a look at each configuration.
+The FOM files are given by name only: the HLA configurations use the RPR FOM shipped with the sample, ``Content/coreDS/RPR_FOM_v2.0_1516-2010.xml``, next to the configurations, and the DIS configuration uses ``DIS_V5_IEEE_1278.1-1995_expert.xml``, shipped with coreDS Unreal in the plugin's ``ThirdParty/coreDS/bin`` folder (``coreDSModule/ThirdParty/coreDS/bin/VC143/x64/Release`` on Windows).
 
-(Directly jump to the `HLA configuration <#hla>`__)
+Let's take a look at each configuration.
+
+(Directly jump to the `High-Level Architecture (HLA)`_ configuration.)
 
 Distributed Interactive Simulation (DIS)
 ----------------------------------------
 
-For both configurations, it is important to configure the Configured Network Adapter. Click on the dropbox and select your active Network Adapter.
+Configure the network adapter: click the "Network Interface Address" drop-down list and select your active network adapter. Set the destination address for your network too.
 
-.. image:: Doc/Images/DISConnectionConfiguration.PNG
-   :alt: Plugin DISConnectionConfiguration Screenshot
+All the coreDS Unreal samples can run at the same time and see each other's entities. Their DIS configurations are DIS 5 on port 3000, exercise 1, listen on every network adapter (``0.0.0.0``) and broadcast to ``255.255.255.255``; each sample has its own Application Number (Automatic Mode 3010, Model Integration 3020 and 3021, First Person Shooter 3030, C++ 3040, Cesium 3050), since two simulators with the same Site and Application Numbers get their entities mixed up. Their HLA configurations join the ``coreDSUnreal`` federation with the RPR FOM 2.0 through the DLC (Dynamic Link Compatible) 1516e plugin, each with its own federate name. Give each running copy of this sample its own Application Number.
 
-Even if DIS does not explicitly support Subscription, coreDS supports incoming filtering. First, we must let coreDS know that we want to receive the EntityStatePDU. Publish PDUs that you want to send and subscribe to those you want to receive.
+.. image:: Doc/Images/DISConnectionConfiguration.png
+   :alt: DIS connection configuration
+
+Even if DIS does not explicitly support subscriptions, coreDS supports incoming filtering. First, we must let coreDS know that we want to receive the EntityStatePDU. Publish the PDUs you want to send and subscribe to those you want to receive.
 
 .. image:: Doc/Images/DIS_Receiver_PubSub.png
-   :alt: Plugin DIS_Receiver_PubSub Screenshot
+   :alt: DIS publication and subscription
 
 Receiving
 ~~~~~~~~~
 
-Then comes the Mapping configuration. Since we are in a receiver, we care about the “Mapping In”
+Then comes the mapping configuration. To receive, we care about the "Mapping In".
 
-The first step is to Map a Local Object to a Protocol Object. As you see, an “Automatic Object” is listed in the “+” list. You can then link the “Automatic Object” to “Entity State PDU”.
+The first step is to map a local object to a protocol object. "AutomaticMode" is listed in the "+" list. Link "Entity State" to "AutomaticMode".
 
-.. image:: Doc/Images/DISMappingIn_ObjectMapping.png
-   :alt: Plugin DISMappingIn_ObjectMapping Screenshot
-
-Then you must map the local properties to the protocol properties. Since we are in a receiving mode, we only care about the values we are interested in. In our case, we want to send back to Unreal the Location and the Orientation. When using the Automatic Mode, it is really important to set a “UniqueIdentifier”. The “UniqueIdentifier” can be anything meaning you could assign it to Marking to discriminate based on the object name. In most cases, we use the EntityType. To do so, set an “On Data Received” script to “EntityType”. You can select the script “UseAsUniqueIdentifier.lua”.
-
-.. image:: Doc/Images/DISMappingIn_WithChoice.png
-   :alt: Plugin DISMappingIn_WithChoice Screenshot
+Then you must map the local properties to the protocol properties. When receiving, we only map the values we are interested in: here, the location and the orientation. When using the Automatic Mode, the ObjectClassSelector must be set: it selects the actor to spawn. It can be anything; for example, you could assign it the Marking to select the actor based on the object name. In most cases, we use the EntityType. To do so, set the "On Data Received" script of the EntityType group to ``UseEntityTypeAsUniqueIdentifier.lua``.
 
 Dead Reckoning
 ~~~~~~~~~~~~~~
 
-If DR is enabled, you must map the DR properties correctly like this:
+If dead reckoning is enabled, you must map the DR properties like this:
 
-.. image:: Doc/Images/DISMappingIn_DR.png
-   :alt: Plugin DISMappingIn_DR Screenshot
+Coordinates
+~~~~~~~~~~~
 
-Finally, we are receiving coordinates in Geocentric format, which Unreal doesn’t like. We could convert the coordinates from within Unreal but by doing so, it will be harder to switch to a different Distributed Simulation Protocol. To keep all the configurations runtime, we use the embedded Lua scripting engine to convert from Geocentric to flat coordinates centred around a given Lat/Long.
+Finally, we receive coordinates in geocentric format, which Unreal doesn't use. We could convert the coordinates within Unreal, but that would make it harder to switch to a different distributed simulation protocol. To keep everything configurable at runtime, we use the embedded Lua scripting engine to convert from geocentric coordinates to flat coordinates centred on a given latitude and longitude (the "Reference Latitude", "Reference Longitude" and "Reference Altitude" of the Scene settings).
 
 .. image:: Doc/Images/DISMappingIn.png
-   :alt: Plugin DISMappingIn Screenshot
+   :alt: DIS Mapping In, conversion scripts
 
-Below is the script that converts from Geocentric to local coordinates. Scripts are located in /Config/Scripts
+Below is ``convertPositionFromDISToUnreal.lua``, the "On Data Received" script of the Location group. It converts the location and the orientation. Unreal X is north and Y is east, and Unreal units are centimetres. Scripts are located in ``Content/coreDS/Script``.
 
 .. code-block:: lua
 
-   require("lla2ecef")  -- include functions to convert from Lat/Log to geocentric
-   require("ReferenceLatLongAlt") -- Include the Center Lat/Long
+   require("ReferenceLatLongAlt")
+   angleConversions = require("angleConversions")
+   require("ecef2lla")
 
-   lastPositionX = 0 -- Last received position, used by the Orientation conversion script
-   lastPositionY = 0
-   lastPositionZ = 0
+   function convertPositionFromDISToUnreal(value)
 
-   function convertPositionFromDIS()  --same function name as the filename
-       lastPositionX = DSimLocal.X
-       lastPositionY = DSimLocal.Y
-       lastPositionZ = DSimLocal.Z
+      -- Since we are working over a fairly small part of the planet, we can assume a flat surface
+      a, b, c = EcefToEnu(value['LocationInWorldCoordinates.X']:toDouble(), value['LocationInWorldCoordinates.Y']:toDouble(), value['LocationInWorldCoordinates.Z']:toDouble(), referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
-       -- Since we are working over a fairly small part of the planet, we can assume a flat surface
-       --Convert lat/long to geocentric
-       tempx, tempy, tempz = lla2ecef(referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
+      --convert geocentric to lat/long
+      lat, long, alt = ecef2lla(value['LocationInWorldCoordinates.X']:toDouble(), value['LocationInWorldCoordinates.Y']:toDouble(), value['LocationInWorldCoordinates.Z']:toDouble())
 
-       DSimLocal.X = (tempx - DSimLocal.X)  -- offset to the local coordinates
-       DSimLocal.Y = (tempy - DSimLocal.Y)
-       DSimLocal.Z = (tempz - DSimLocal.Z)
+      lat = 0.0174532925 * lat  -- convert to radian
+      long = 0.0174532925 * long  -- convert to radian
+
+      yaw = angleConversions.getOrientationFromEuler(lat, long, value['Orientation.Psi']:toDouble(), value['Orientation.Theta']:toDouble())
+      pitch = angleConversions.getPitchFromEuler(lat, long, value['Orientation.Psi']:toDouble(), value['Orientation.Theta']:toDouble())
+      roll = angleConversions.getRollFromEuler(lat, long, value['Orientation.Psi']:toDouble(), value['Orientation.Theta']:toDouble(), value['Orientation.Phi']:toDouble())
+
+      value['Orientation.Psi']:set(roll)
+      value['Orientation.Theta']:set(pitch)
+      value['Orientation.Phi']:set(yaw)
+
+      --scale back from meter to cm
+      value['LocationInWorldCoordinates.X']:set(b*100)
+      value['LocationInWorldCoordinates.Y']:set(a*100)
+      value['LocationInWorldCoordinates.Z']:set(c*100)
+
    end
 
-At this point, you are done. Depending on your plugin configuration, each time an EntityStatePdu is received, a new object will be spawned and its complete lifecycle will be handled by coreDS Unreal.
+At this point, you are done. Depending on your Automatic Mode settings, each time an EntityStatePDU of a new entity is received, a new actor is spawned and coreDS Unreal handles its complete life cycle.
+
+.. _automatic-mode-sample-dis-sending:
 
 Sending
 ~~~~~~~
 
-If there is an object that you want to publish to the network, you must add the “coreDS Sender Component” to that object or blueprint.
+To publish an actor to the network, add the "coreDS sender component" to that actor or Blueprint.
 
 .. image:: Doc/Images/coreDSSenderComponentOnObject.png
-   :alt: Plugin coreDS Sender Component Screenshot
+   :alt: coreDS sender component
 
-Once the actor is added, you must set a valid ObjectType (all objects with the same object type will use the same mapping). In our particular case, we assigned a “Core DS Sender Component” to the FirstPersonCharacter" actor and the “FirstPersonProjectile” blueprint.
+Once the component is added, set its "Object Type": all objects with the same object type use the same mapping. An object type is a string of your choice, unrelated to the naming convention of the distributed simulation protocol, that identifies a type of object in your simulator. In this sample, the ``FirstPersonCharacter`` Blueprint uses the object type "Gun" and the projectile uses "Munition".
 
-Then comes the Mapping configuration. Since we are in a Sender, we care about the “Mapping Out”
+Then comes the mapping configuration. To send, we care about the "Mapping Out".
 
-The first step is to Map a Local Object to a Protocol Object. As you see, the Names you defined during the component configuration are listed in the “+” list. You can then link the Local Object to a Protocol Object by using the dropbox next to the Object name.
+The first step is to map a local object to a protocol object. The object types defined in the components are listed in the "+" list. Link each local object to a protocol object with the drop-down list next to the object name.
 
-Then you must map the local properties to the protocol properties. Since we are in a Sender mode, we must fill the complete structure. Static values can be set at this point. We will map Location and Orientation to local properties.
+Then you must map the local properties to the protocol properties. When sending, you must fill the complete structure. Static values can be set at this point. Map Location and Orientation to the local properties.
 
-Finally, we are sending coordinations in local format, which DIS doesn’t like. We could convert the coordinates from within Unreal but by doing so, it will be harder to switch to a different Distributed Simulation Protocol. To keep all the configurations editable runtime, we use the embedded Lua scripting engine to convert from flat coordinates, centered around a given Lat/Long, to Geocentric. 
+Finally, we send coordinates in local format, which DIS doesn't use. To keep everything configurable at runtime, we use the embedded Lua scripting engine to convert from flat coordinates, centred on the reference latitude and longitude, to geocentric coordinates.
 
 .. image:: Doc/Images/DISMappingOut.png
-   :alt: Plugin DISMappingOut Screenshot
+   :alt: DIS Mapping Out
 
-As for outgoing values, you must set a conversion script to convert from the local coordinates to geocentric coordinates. Scripts are located in /Content/coreDS/Scripts.
+Set ``convertUnrealPositionToDIS.lua`` as the "On Data Updated" script of the Location group and ``convertOrientationFromUnrealToDIS.lua`` as the one of the Orientation group. Scripts are located in ``Content/coreDS/Script``.
 
 High-Level Architecture (HLA)
 -----------------------------
 
-For both configurations, it is important to configure the connection to the correct RTI.
+For both configurations, configure the connection to the correct RTI.
 
 .. image:: Doc/Images/HLAConnectionRTISettings.png
-   :alt: Plugin HLAConnectionConfiguration Screenshot
+   :alt: HLA RTI settings
 
-coreDS-based products support a wide variety of RTI, HLA versions and binding types. It is important to select the correct RTI Settings combination. Although coreDS will try to inform you, at runtime, if the selected combination is invalid, this is not a failsafe process. An incorrect combination can lead to an unexpected crash. Do not hesitate to contact us if you are unsure about your configuration.
+coreDS-based products support a wide variety of RTIs, HLA versions and binding types. It is important to select the correct RTI settings combination. Although coreDS tries to inform you at runtime if the selected combination is invalid, this is not a failsafe process: an incorrect combination can lead to an unexpected crash. Do not hesitate to contact us if you are unsure about your configuration.
 
 Publication and Subscription
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this particular sample, we published/subscribed to
-
-HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human, EntityType, EntityIdentifier and Spacial
+In this sample, we subscribe to the EntityType and Spatial attributes of HLAobjectRoot.BaseEntity.PhysicalEntity, and publish the same attributes for HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human and HLAobjectRoot.BaseEntity.PhysicalEntity.Munition.
 
 .. image:: Doc/Images/HLA_Receiver_PubSub.png
-   :alt: Plugin HLA_Receiver_PubSub Screenshot
+   :alt: HLA publication and subscription
 
 Federate Parameters
 ~~~~~~~~~~~~~~~~~~~
 
-The Federate parameters pane contains all the information required to create, join and configure a connection to the RTI.
+The Federate Parameters pane contains all the information required to create, join and configure a connection to the RTI, including the FOM file, ``Content/coreDS/RPR_FOM_v2.0_1516-2010.xml``.
 
 .. image:: Doc/Images/HLAFederateSettings.png
-   :alt: Plugin HLA Federate Settings Screenshot
+   :alt: HLA federate parameters
 
 Receiving
 ^^^^^^^^^
 
-Then comes the Mapping configuration. Since we are in a receiver, we care about the “Mapping In”
+Then comes the mapping configuration. To receive, we care about the "Mapping In".
 
-The first step is to Map a Local Object to a Protocol Object. As you see, an “Automatic Object” is listed in the “+” list. You can then link the “Automatic Object” to “HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human”.
+The first step is to map a local object to a protocol object. "AutomaticMode" is listed in the "+" list. Link the HLA object class to "AutomaticMode": this sample uses "HLAobjectRoot.BaseEntity.PhysicalEntity".
 
-.. image:: Doc/Images/HLAMappingIn_ObjectMapping.png
-   :alt: Plugin HLAMappingIn_ObjectMapping Screenshot
-
-Then you must map the local properties to the protocol properties. Since we are in a receiving mode, we only care about the values we are interested in. In our case, we want to send back to Unreal the Location and the Orientation. When using the Automatic Mode, it is really important to set a “UniqueIdentifier”. The “UniqueIdentifier” can be anything meaning you could assign it to Marking to discriminate based on the object name. In most cases, we use the EntityType. To do so, set an “On Data Received” script to “EntityType”. You can select the script “UseAsUniqueIdentifier.lua”.
-
-.. image:: Doc/Images/HLAMappingIn_WithChoice.png
-   :alt: Plugin HLAMappingIn_WithChoice Screenshot
+Then you must map the local properties to the protocol properties: here, the location and the orientation of the Spatial attribute. As for DIS, set the "On Data Received" script of the EntityType attribute to ``UseEntityTypeAsUniqueIdentifier.lua`` so the EntityType is used as the ObjectClassSelector.
 
 Dead Reckoning
 ^^^^^^^^^^^^^^
 
-If DR is enabled, you must map the DR properties correctly like this:
+If dead reckoning is enabled, you must map the DR properties like this:
 
-.. image:: Doc/Images/HLAMappingIn_DR.png
-   :alt: Plugin DISMappingIn_DR Screenshot
+Coordinates
+^^^^^^^^^^^
 
-Finally, we are receiving coordination in a Geocentric format, which Unreal doesn’t like. We could convert the coordinates from within Unreal but by doing so, it will be harder to switch to a different Distributed Simulation Protocol. To keep all the configurations editable at runtime, we use the embedded Lua scripting engine to convert from Geocentric to flat coordinates centred around a given Lat/Long.
+Finally, we receive coordinates in geocentric format, which Unreal doesn't use. To keep everything configurable at runtime, we use the embedded Lua scripting engine to convert from geocentric coordinates to flat coordinates centred on the reference latitude and longitude.
 
 .. image:: Doc/Images/HLAMappingIn.png
-   :alt: Plugin DISMappingIn Screenshot
+   :alt: HLA Mapping In, conversion script
 
-Below is the script that converts from Geocentric to local (ENU) coordinates. Scripts are located in /Config/Scripts
+Below is ``convertPositionFromHLAToUnreal.lua``, the "On Data Received" script of the Spatial attribute. It converts the location and the orientation. Scripts are located in ``Content/coreDS/Script``.
 
 .. code-block:: lua
 
@@ -233,51 +228,43 @@ Below is the script that converts from Geocentric to local (ENU) coordinates. Sc
    require("ecef2lla")
    require("ReferenceLatLongAlt")
 
-   function convertPositionFromHLA()
+   function convertPositionFromHLAToUnreal(value)
+      -- Since we are working over a fairly small part of the planet, we can assume a flat surface
+      a, b, c = EcefToEnu(value['WorldLocation.X']:toDouble(), value['WorldLocation.Y']:toDouble(), value['WorldLocation.Z']:toDouble(), referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
 
-   --convert orientation
-   latTemp, lonTemp, discard = ecef2lla(DSimLocal.WorldLocation.X,DSimLocal.WorldLocation.Y,DSimLocal.WorldLocation.Z)
+      --convert geocentric to lat/long
+      lat, long, alt = ecef2lla(value['WorldLocation.X']:toDouble(), value['WorldLocation.Y']:toDouble(), value['WorldLocation.Z']:toDouble())
 
-   local lat = math.rad(latTemp)  --converting to rad because function requires rad
-   local lon = math.rad(lonTemp)
+      lat = 0.0174532925 * lat  -- convert to radian
+      long = 0.0174532925 * long  -- convert to radian
 
-   local psi =  DSimLocal.Orientation.Psi-- roll
-   local theta = DSimLocal.Orientation.Theta--pitch
-   local phi = DSimLocal.Orientation.Phi --yaw
+      yaw = angleConversions.getOrientationFromEuler(lat, long, value['Orientation.Psi']:toDouble(), value['Orientation.Theta']:toDouble())
+      pitch = angleConversions.getPitchFromEuler(lat, long, value['Orientation.Psi']:toDouble(), value['Orientation.Theta']:toDouble())
+      roll = angleConversions.getRollFromEuler(lat, long, value['Orientation.Psi']:toDouble(), value['Orientation.Theta']:toDouble(), value['Orientation.Phi']:toDouble())
 
-   DSimLocal.Orientation.Psi =  angleConversions.getOrientationFromEuler(lat, lon, psi, theta)
-   DSimLocal.Orientation.Theta = angleConversions.getPitchFromEuler(lat, lon, psi, theta)
-   DSimLocal.Orientation.Phi = angleConversions.getRollFromEuler(lat, lon, psi, theta, phi)
+      value['Orientation.Psi']:set(roll)
+      value['Orientation.Theta']:set(pitch)
+      value['Orientation.Phi']:set(yaw)
 
+      --scale back from meter to cm
+      value['WorldLocation.X']:set(b*100)
+      value['WorldLocation.Y']:set(a*100)
+      value['WorldLocation.Z']:set(c*100)
 
-   --- convert position
-   DSimLocal.WorldLocation.X, DSimLocal.WorldLocation.Y,  DSimLocal.WorldLocation.Z = EcefToEnu(DSimLocal.WorldLocation.X, DSimLocal.WorldLocation.Y, DSimLocal.WorldLocation.Z, referenceOffset_Lat , referenceOffset_Long , referenceOffset_Alt )
+   end
 
-   DSimLocal.WorldLocation.X = DSimLocal.WorldLocation.X
-   DSimLocal.WorldLocation.Y = DSimLocal.WorldLocation.Y
-   DSimLocal.WorldLocation.Z = DSimLocal.WorldLocation.Z
-
-At this point, you are done. Depending on your plugin configuration, each time a Human is received, a new object will be spawned and its complete lifecycle will be handled by coreDS Unreal.
+At this point, you are done. Depending on your Automatic Mode settings, each time a new PhysicalEntity is discovered, a new actor is spawned and coreDS Unreal handles its complete life cycle.
 
 Sending
 ^^^^^^^
 
-If there is an object that you want to publish to the network, you must add the “coreDS Sender Component” to that object or blueprint.
+As for DIS, the actors to publish carry a "coreDS sender component" (see the DIS `Sending <automatic-mode-sample-dis-sending_>`_ section). In this sample, "Gun" is mapped to HLAobjectRoot.BaseEntity.PhysicalEntity.Lifeform.Human and "Munition" to HLAobjectRoot.BaseEntity.PhysicalEntity.Munition.
 
-.. image:: Doc/Images/coreDSSenderComponentOnObject.png
-   :alt: Plugin coreDS Sender Component Screenshot
+Then you must map the local properties to the protocol properties. When sending, you must fill the complete structure. Static values can be set at this point. Map the location and the orientation of the Spatial attribute to the local properties.
 
-Once the actor is added, you must set a valid ObjectType (all objects with the same object type will use the same mapping). In our particular case, we assigned a “Core DS Sender Component” to the FirstPersonCharacter" actor and the “FirstPersonProjectile” actor blueprint. An “ObjectType” is a unique string, with no relation to the naming convention of the distributed simulation system, used to identify a given object type in your simulator.
-
-Then comes the Mapping configuration. Since we are in a Sender, we care about the “Mapping Out”
-
-The first step is to Map a Local Object to a Protocol Object. As you see, the Names you defined during the component configuration are listed in the “+” list. You can then link the Local Object to a Protocol Object by using the dropbox next to the Object name.
-
-Then you must map the local properties to the protocol properties. Since we are in a Sender mode, we must fill the complete structure. Static values can be set at this point. We will map Location and Orientation to local properties.
-
-Finally, we are sending coordinations in local format, which the RPR-FOM doesn’t like. We could convert the coordinates from within Unreal but by doing so, it will be harder to switch to a different Distributed Simulation Protocol. To keep all the configurations editable at runtime, we use the embedded Lua scripting engine to convert from flat coordinates, centered around a given Lat/Long, to Geocentric.
+Finally, we send coordinates in local format, which the RPR FOM doesn't use. We use the embedded Lua scripting engine to convert from flat coordinates, centred on the reference latitude and longitude, to geocentric coordinates.
 
 .. image:: Doc/Images/HLAMappingOut.png
-   :alt: Plugin HLAMappingOut Screenshot
+   :alt: HLA Mapping Out
 
-As for outgoing values, you must set a conversion script to convert from the local coordinates to geocentric coordinates. Scripts are located in /Content/coreDS/Scripts.
+Set ``convertUnrealPositionToHLA.lua`` as the "On Data Updated" script of the Spatial attribute. It converts the location and the orientation. Scripts are located in ``Content/coreDS/Script``.
